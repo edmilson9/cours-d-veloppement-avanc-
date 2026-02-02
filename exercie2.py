@@ -14,7 +14,7 @@ p = []
 with open ("Mots.txt") as m:
     for i in m :
         p.append(i)
-print(p)
+#print(p)
 
 def sorte(l):
     print(l == sorted(l))
@@ -24,7 +24,7 @@ def find(word, l):
     for i in l:
         if word == i:
             print(l.index(i))
-#find("UN\n", p)
+find("UN\n", p)
 #find("DEUX\n", p)
 
 def dicho (l, word):
@@ -35,4 +35,4 @@ def dicho (l, word):
 
 
 
-dicho(p, "UN\n")
+#dicho(p, "UN\n")

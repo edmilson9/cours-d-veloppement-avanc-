@@ -12,12 +12,35 @@ def div (n):
         if i!=0 and n%i== 0:
             t.append(i)
     if len(t) > 1:
-        print(" Diviseurs propres : ", t)
+        return False
     else :
-        return print(n, "est premier")
+        return True
 div(13)
+
+def prime():
+    p = []
+    i = 2
+    while len(p) < 100:
+        if div(i):
+            p.append(i)
+        i += 1
+    print(p)
+prime()
 
 def phare(m, n):
     tot = 2*(m*n) * 5 * 7
-    print("Pour ", m, " marches de ", n, " centimètres il parcourt ", tot, " par semaine")
+    print("Pour ", m, " marches de ", n, " centimètres il parcourt ", tot/100, "m par semaine")
 phare(20, 10)
+
+def valide():
+    saisie = input("Saisir une chaine d'adn : ")
+    for l in saisie:
+        if l not in "atgc":
+            print("x")
+            return False
+        
+    print("V")
+    return True
+valide()
+    
+     
