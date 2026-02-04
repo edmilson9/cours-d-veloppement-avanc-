@@ -1,7 +1,5 @@
 from InvalidVacheException import InvalidVacheException
 import itertools
-from TypeNourriture import TypeNourriture
-
 
 class Vache:
     id_iter = itertools.count()
@@ -29,9 +27,12 @@ class Vache:
         if self.petit_nom.isspace() or self.petit_nom == "" or self.age <= 0 or self.poids <= 0 or self.poids > self.POIDS_MAX or self.age > self.AGE_MAX:
             raise InvalidVacheException(f"La vache {self.id} n'est pas valide")
 
-    def brouter(self, quantite, nourriture=None):
+    def ajouter_panse(self, quantite):
         if quantite > 0:
-            self.panse += quantite
+            self.panse+=quantite
+
+    def brouter(self, quantite, nourriture=None):
+        self.ajouter_panse(quantite)
         if nourriture != None or quantite <= 0:
             raise InvalidVacheException("Le type de nourriture n'est pas bon ")
         print(f"{self.panse}")
@@ -50,16 +51,17 @@ class Vache:
             raise InvalidVacheException("La rumination ne peut être effectue car la panse est vide")
 
     def _calculer_lait(self, panse_avant):
-        return self.RENDEMENT_RUMINATION * panse_avant
+        lait = self.RENDEMENT_RUMINATION * panse_avant
+        return lait
     
-    def _stocker_lait(lait):
-        return None
+    def _stocker_lait(self, lait):
+        self.poids += lait
+        
     
-    def _post_rumination(panse_avant, lait):
-        return None
+    def _post_rumination(self):
+        self.panse = 0.0
 
     def ruminer(self):
-        self._calculer_lait()
-        self._stocker_lait()
-        self._post_rumination()
         self.valider_rumination_possible()
+        self._stocker_lait(self._calculer_lait(self.panse))
+        self._post_rumination()
